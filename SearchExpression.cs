@@ -5,10 +5,10 @@ using System.Text;
 // TODO "Helena Vera"
 // TODO soften up the AND meaning of '+' and ' '
 
-/// <summary>
-/// based on Modenova Project (c) 2015 Rainer Burkhardt 
-/// also based on HDitem (c) 2013 JgenCy Project Inc.
-/// </summary>
+// / <summary>
+// / based on Modenova Project (c) 2015 Rainer Burkhardt 
+// / also based on HDitem (c) 2013 JgenCy Project Inc.
+// / </summary>
 namespace RaiUtilsCore
 {
     /// <summary>
@@ -86,6 +86,7 @@ namespace RaiUtilsCore
             return allMatch;
         }
         #region unused code
+        /*
         /// <summary>a replacement for string.Contains</summary>
         /// <param name="value"></param>
         /// <param name="token"></param>
@@ -94,153 +95,154 @@ namespace RaiUtilsCore
         /// <remarks>https://kevinmontrose.com An Optimization Exercise
         /// I don't think I really need it here - I just wanted to open up a path to speeding (unsafe/pointer)
         /// </remarks>
-        //public static bool ContainsTokenMonty(string value, string token, char delimiter = ';')
-        //{
-        //	const int charsPerLong = sizeof(long) / sizeof(char);
-        //	const int charsPerInt = sizeof(int) / sizeof(char);
-        //	const int bytesPerChar = sizeof(char) / sizeof(byte);
+        public static bool ContainsTokenMonty(string value, string token, char delimiter = ';')
+        {
+        	const int charsPerLong = sizeof(long) / sizeof(char);
+        	const int charsPerInt = sizeof(int) / sizeof(char);
+        	const int bytesPerChar = sizeof(char) / sizeof(byte);
 
-        //	if (string.IsNullOrEmpty(token)) return false;
-        //	if (string.IsNullOrEmpty(value)) return false;
+        	if (string.IsNullOrEmpty(token)) return false;
+        	if (string.IsNullOrEmpty(value)) return false;
 
-        //	var delimiterTwice = (delimiter << 16) | delimiter;
+        	var delimiterTwice = (delimiter << 16) | delimiter;
 
-        //	var valueLength = value.Length;
-        //	var tokenLength = token.Length;
+        	var valueLength = value.Length;
+        	var tokenLength = token.Length;
 
-        //	if (tokenLength > valueLength) return false;
+        	if (tokenLength > valueLength) return false;
 
-        //	int tokenLongs;
-        //	bool tokenTrailingInt, tokenTrailingChar;
-        //	{
-        //		var remainingChars = tokenLength;
-        //		tokenLongs = remainingChars / charsPerLong;
-        //		tokenTrailingInt = (tokenLength & 0x02) != 0;
-        //		tokenTrailingChar = (tokenLength & 0x01) != 0;
-        //	}
+        	int tokenLongs;
+        	bool tokenTrailingInt, tokenTrailingChar;
+        	{
+        		var remainingChars = tokenLength;
+        		tokenLongs = remainingChars / charsPerLong;
+        		tokenTrailingInt = (tokenLength & 0x02) != 0;
+        		tokenTrailingChar = (tokenLength & 0x01) != 0;
+        	}
 
-        //	var tokenByteLength = tokenLength * bytesPerChar;
+        	var tokenByteLength = tokenLength * bytesPerChar;
 
-        //	unsafe
-        //	{
-        //		fixed (char* valuePtr = value, tokenPtr = token)
-        //		{
-        //			var curValuePtr = valuePtr;
-        //			var endValuePtr = valuePtr + valueLength;
+        	unsafe
+        	{
+        		fixed (char* valuePtr = value, tokenPtr = token)
+        		{
+        			var curValuePtr = valuePtr;
+        			var endValuePtr = valuePtr + valueLength;
 
-        //			while (true)
-        //			{
-        //				long* tokenLongPtr = (long*)tokenPtr;
-        //				{
-        //					for (var i = 0; i < tokenLongs; i++)
-        //					{
-        //						var tokenLong = *tokenLongPtr;
+        			while (true)
+        			{
+        				long* tokenLongPtr = (long*)tokenPtr;
+        				{
+        					for (var i = 0; i < tokenLongs; i++)
+        					{
+        						var tokenLong = *tokenLongPtr;
 
-        //						var valueLong = *((long*)curValuePtr);
+        						var valueLong = *((long*)curValuePtr);
 
-        //						if (tokenLong == valueLong)
-        //						{
-        //							tokenLongPtr++;
-        //							curValuePtr += charsPerLong;
-        //							continue;
-        //						}
-        //						else
-        //						{
-        //							goto advanceToNextDelimiter;
-        //						}
-        //					}
-        //				}
+        						if (tokenLong == valueLong)
+        						{
+        							tokenLongPtr++;
+        							curValuePtr += charsPerLong;
+        							continue;
+        						}
+        						else
+        						{
+        							goto advanceToNextDelimiter;
+        						}
+        					}
+        				}
 
-        //				int* tokenIntPtr = (int*)tokenLongPtr;
-        //				if (tokenTrailingInt)
-        //				{
-        //					var tokenInt = *tokenIntPtr;
+        				int* tokenIntPtr = (int*)tokenLongPtr;
+        				if (tokenTrailingInt)
+        				{
+        					var tokenInt = *tokenIntPtr;
 
-        //					var valueInt = *((int*)curValuePtr);
+        					var valueInt = *((int*)curValuePtr);
 
-        //					if (tokenInt == valueInt)
-        //					{
-        //						tokenIntPtr++;
-        //						curValuePtr += charsPerInt;
-        //					}
-        //					else
-        //					{
-        //						goto advanceToNextDelimiter;
-        //					}
-        //				}
+        					if (tokenInt == valueInt)
+        					{
+        						tokenIntPtr++;
+        						curValuePtr += charsPerInt;
+        					}
+        					else
+        					{
+        						goto advanceToNextDelimiter;
+        					}
+        				}
 
-        //				char* tokenCharPtr = (char*)tokenIntPtr;
-        //				if (tokenTrailingChar)
-        //				{
-        //					var tokenChar = *tokenCharPtr;
+        				char* tokenCharPtr = (char*)tokenIntPtr;
+        				if (tokenTrailingChar)
+        				{
+        					var tokenChar = *tokenCharPtr;
 
-        //					var valueChar = *curValuePtr;
+        					var valueChar = *curValuePtr;
 
-        //					if (tokenChar == valueChar)
-        //					{
-        //						tokenCharPtr++;
-        //						curValuePtr++;
-        //					}
-        //					else
-        //					{
-        //						goto advanceToNextDelimiter;
-        //					}
-        //				}
+        					if (tokenChar == valueChar)
+        					{
+        						tokenCharPtr++;
+        						curValuePtr++;
+        					}
+        					else
+        					{
+        						goto advanceToNextDelimiter;
+        					}
+        				}
 
-        //				if (curValuePtr == endValuePtr || *curValuePtr == delimiter)
-        //				{
-        //					return true;
-        //				}
+        				if (curValuePtr == endValuePtr || *curValuePtr == delimiter)
+        				{
+        					return true;
+        				}
 
-        //				advanceToNextDelimiter:
+        				advanceToNextDelimiter:
 
-        //				while (true)
-        //				{
-        //					var curVal = *((int*)curValuePtr);
+        				while (true)
+        				{
+        					var curVal = *((int*)curValuePtr);
 
-        //					var masked = curVal ^ delimiterTwice;
-        //					var temp = masked & 0x7FFF7FFF;
-        //					temp = temp + 0x7FFF7FFF;
-        //					temp = (int)(temp & 0x80008000);
-        //					temp = temp | masked;
-        //					temp = temp | 0x7FFF7FFF;
-        //					temp = ~temp;
-        //					var neitherMatch = temp == 0;
+        					var masked = curVal ^ delimiterTwice;
+        					var temp = masked & 0x7FFF7FFF;
+        					temp = temp + 0x7FFF7FFF;
+        					temp = (int)(temp & 0x80008000);
+        					temp = temp | masked;
+        					temp = temp | 0x7FFF7FFF;
+        					temp = ~temp;
+        					var neitherMatch = temp == 0;
 
-        //					if (neitherMatch)
-        //					{
-        //						curValuePtr += charsPerInt;
-        //						if (curValuePtr >= endValuePtr)
-        //						{
-        //							return false;
-        //						}
-        //						continue;
-        //					}
+        					if (neitherMatch)
+        					{
+        						curValuePtr += charsPerInt;
+        						if (curValuePtr >= endValuePtr)
+        						{
+        							return false;
+        						}
+        						continue;
+        					}
 
-        //					var top16 = temp & 0xFFFF0000;
-        //					if (top16 != 0)
-        //					{
-        //						curValuePtr += charsPerInt;
+        					var top16 = temp & 0xFFFF0000;
+        					if (top16 != 0)
+        					{
+        						curValuePtr += charsPerInt;
 
-        //						break;
-        //					}
+        						break;
+        					}
 
-        //					var bottom16 = temp & 0x0000FFFF;
-        //					if (bottom16 != 0)
-        //					{
-        //						curValuePtr += 1;
-        //					}
-        //				}
+        					var bottom16 = temp & 0x0000FFFF;
+        					if (bottom16 != 0)
+        					{
+        						curValuePtr += 1;
+        					}
+        				}
 
-        //				var remainingBytesInValue = ((byte*)endValuePtr) - ((byte*)curValuePtr);
-        //				if (remainingBytesInValue < tokenByteLength)
-        //				{
-        //					return false;
-        //				}
-        //			}
-        //		}
-        //	}
-        //}
+        				var remainingBytesInValue = ((byte*)endValuePtr) - ((byte*)curValuePtr);
+        				if (remainingBytesInValue < tokenByteLength)
+        				{
+        					return false;
+        				}
+        			}
+        		}
+        	}
+        }
+        */
         #endregion
         private static bool IsMatch(string Value, string searchExpressionWithWildcards)
         {
@@ -325,7 +327,7 @@ namespace RaiUtilsCore
         /// c) check if the value of the field deleted contains the string false
         /// if all yes: IsMatch evaluates to true, else false</example>
         /// <remarks>known problems:
-        /// Escaping of special characters like <, >, /, =, +
+        /// Escaping of special characters like &lt;, &gt;, /, =, +
         /// uppercase/lowercase for fieldnames
         /// captions not necessarily match the field names (especially in localizations)
         /// 2-step-processing (ParsePattern, IsMatch) might not work with LinqDataSource
