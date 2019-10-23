@@ -1,8 +1,8 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
 <PropertyGroup>
-    <Title>RAI.Utils</Title>
-    <PackageId>RAI.Utils</PackageId>
+    <Title>RaiUtilsCore</Title>
+    <PackageId>RaiUtilsCore</PackageId>
     <Version>2.1.0</Version>
     <Authors>Rainer Burkhardt</Authors>
     <Description>Random, Email, ParameterDictionary</Description>
@@ -12,10 +12,10 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>email, parameter dictionary, random, core</PackageTags>
     <IsPackable>true</IsPackable>
-    <ProjectURL>https://github.com/Burkhardt/RAI.Utils</ProjectURL>
+    <ProjectURL>https://github.com/Burkhardt/RaiUtilsCore</ProjectURL>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
     <Copyright>© Rainer Burkhardt. All rights reserved.</Copyright>
-    <RepositoryUrl>https://github.com/Burkhardt/RAI.Utils</RepositoryUrl>
+    <RepositoryUrl>https://github.com/Burkhardt/RaiUtilsCore</RepositoryUrl>
     <RepositoryType>github</RepositoryType>
     <PackageReleaseNotes>Version for netstandard2.1</PackageReleaseNotes>
     <!--<PackageIcon></PackageIcon>-->
