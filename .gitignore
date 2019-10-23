@@ -27,3 +27,5 @@ bld/
 msbuild.log
 msbuild.err
 msbuild.wrn
+publish/RAI.Utils.2.1.0.nupkg
+publish/RAI.Utils.2.1.0.nupkg
