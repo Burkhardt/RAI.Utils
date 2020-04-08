@@ -4,7 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 
-namespace RaiUtilsCore
+namespace RaiUtils
 {
 	public class ParameterDictionary : StringDictionary
 	{

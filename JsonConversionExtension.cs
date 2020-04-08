@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 // don't forget that Jil can do all this out of the box (I think - RSB, 20171029)
 
-namespace RaiUtilsCore
+namespace RaiUtils
 {
 
 	public static class JsonConversionExtensions

@@ -1,3 +1,3 @@
-# RaiUtilsCore
+# RaiUtils
 
     Random, Email, ParameterDictionary

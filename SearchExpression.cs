@@ -9,7 +9,7 @@ using System.Text;
 // / based on Modenova Project (c) 2015 Rainer Burkhardt 
 // / also based on HDitem (c) 2013 JgenCy Project Inc.
 // / </summary>
-namespace RaiUtilsCore
+namespace RaiUtils
 {
     /// <summary>
     /// Simple search expression containing '*', '+' and ' ' and other whitespace characters

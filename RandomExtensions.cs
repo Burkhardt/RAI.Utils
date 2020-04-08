@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 // from http://www.blackbeltcoder.com/Articles/linq/extending-linq-with-random-operations
 
-namespace RaiUtilsCore
+namespace RaiUtils
 {
 	public static class RandomExtensions
 	{

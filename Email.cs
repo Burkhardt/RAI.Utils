@@ -1,6 +1,6 @@
 using System.Text.RegularExpressions;
 
-namespace RaiUtilsCore
+namespace RaiUtils
 {
 	/// <summary>
 	/// Validates strings
