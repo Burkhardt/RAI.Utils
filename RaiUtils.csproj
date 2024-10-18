@@ -7,7 +7,7 @@
     <Authors>Rainer Burkhardt</Authors>
     <Description>Random, Email, ParameterDictionary</Description>
     <!--<PackageDescription>Random, Email, ParameterDictionary</PackageDescription>-->
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageTags>email, parameter dictionary, random, core</PackageTags>
